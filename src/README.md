@@ -1,2 +1,2 @@
 # Catatan Belajar Golang
-My Golang Journey(s).
+Ini adalah catatan belajar Golang dasar saya di Youtube: Programmer Zaman Now.
