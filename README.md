@@ -1,2 +1,2 @@
 # Golang
-My Golang Journey(s)
+My Golang Journey(s).
