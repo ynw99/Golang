@@ -1,8 +1,8 @@
 package main
 
 import (
+	"belajar-golang-dasar/helper"
 	"fmt"
-	"golang/belajar-golang-dasar/helper"
 )
 
 func main() {
