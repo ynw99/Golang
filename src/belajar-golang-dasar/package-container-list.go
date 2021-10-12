@@ -18,8 +18,8 @@ func main() {
 	}
 
 	// Dari belakang ke depan
-	for e := data.Back(); e != nil; e = e.Prev() {
-		fmt.Println(e.Value)
+	for element := data.Back(); element != nil; element = element.Prev() {
+		fmt.Println(element.Value)
 	}
 
 	fmt.Println("Front data:", data.Front().Value)
