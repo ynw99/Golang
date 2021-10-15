@@ -51,12 +51,18 @@ func postBooksHandler(c *gin.Context) {
 
 	err := c.ShouldBindJSON(&bookInput)
 
+	errorMessages := []string{}
 	if err != nil {
 		for _, e := range err.(validator.ValidationErrors) {
 			errorMessage := fmt.Sprintf("Error on filed %s, condition %s", e.Field(), e.ActualTag())
-			c.JSON(http.StatusBadRequest, errorMessage)
-			return
+			errorMessages = append(errorMessages, errorMessage)
 		}
+
+		c.JSON(http.StatusBadRequest, gin.H{
+			"errors": errorMessages,
+		})
+
+		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
