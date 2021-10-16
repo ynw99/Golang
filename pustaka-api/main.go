@@ -10,7 +10,7 @@ import (
 )
 
 type BookInput struct {
-	Title string      `json:"title" binding:"required"`
+	Title string      `json:"judul" binding:"required"`
 	Price json.Number `json:"price" binding:"required,number"`
 }
 
@@ -66,19 +66,20 @@ func postBooksHandler(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"title": bookInput.Title,
+		"judul": bookInput.Title,
 		"price": bookInput.Price,
 	})
 }
 
 func main() {
 	router := gin.Default()
+	v1 := router.Group("/v1")
 
-	router.GET("/", rootHandler)
-	router.GET("/hello", helloHandler)
-	router.GET("/books/:id/:title", booksHandler)
-	router.GET("/query", queryHandler)
-	router.POST("/books", postBooksHandler)
+	v1.GET("/", rootHandler)
+	v1.GET("/hello", helloHandler)
+	v1.GET("/books/:id/:title", booksHandler)
+	v1.GET("/query", queryHandler)
+	v1.POST("/books", postBooksHandler)
 
 	router.Run(":8080")
 }
