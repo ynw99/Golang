@@ -42,31 +42,53 @@ func main() {
 	*/
 
 	// Read
-	// var book book.Book
+	// // var book book.Book
 
-	// Slice of books
-	var books []book.Book
+	// // Slice of books
+	// var books []book.Book
 
-	// First row
-	// err = db.First(&book).Error
+	// // First row
+	// // err = db.First(&book).Error
 
-	// First row - primary key
-	// err = db.First(&book, 2).Error
+	// // First row - primary key
+	// // err = db.First(&book, 2).Error
 
-	// Last row
-	// err = db.Last(&book).Error
+	// // Last row
+	// // err = db.Last(&book).Error
 
-	// Show query first
-	// err = db.Debug().First(&book).Error
+	// // Show query first
+	// // err = db.Debug().First(&book).Error
 
-	// Show query last
-	// err = db.Debug().Last(&book).Error
+	// // Show query last
+	// // err = db.Debug().Last(&book).Error
 
-	// Retrieve many data objects
-	// err = db.Debug().Find(&books).Error
+	// // Retrieve many data objects
+	// // err = db.Debug().Find(&books).Error
 
-	// Retrieve many data by string conditions
-	err = db.Debug().Where("rating <> ?", 4).Find(&books).Error
+	// // Retrieve many data by string conditions
+	// err = db.Debug().Where("rating <> ?", 4).Find(&books).Error
+
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("ERROR FINDING BOOK RECORD")
+	// 	fmt.Println("==========================")
+	// }
+
+	// // fmt.Println("Title:", book.Title)
+	// // fmt.Println("Price:", book.Price)
+	// // fmt.Println("Description:", book.Description)
+	// // fmt.Println("Book Object:", book)
+
+	// // Iterate through books slice
+	// for _, b := range books {
+	// 	fmt.Println("Title:", b.Title)
+	// 	fmt.Println("Objek:", b)
+	// }
+
+	// Update
+	var book book.Book
+
+	err = db.Debug().Where("id = ?", 1).First(&book).Error
 
 	if err != nil {
 		fmt.Println("==========================")
@@ -74,16 +96,17 @@ func main() {
 		fmt.Println("==========================")
 	}
 
-	// fmt.Println("Title:", book.Title)
-	// fmt.Println("Price:", book.Price)
-	// fmt.Println("Description:", book.Description)
-	// fmt.Println("Book Object:", book)
+	book.Title = "Man Tiger (Revised Edition)"
 
-	// Iterate through books slice
-	for _, b := range books {
-		fmt.Println("Title:", b.Title)
-		fmt.Println("Objek:", b)
+	err = db.Save(&book).Error
+
+	if err != nil {
+		fmt.Println("==========================")
+		fmt.Println("ERROR UPDATING BOOK RECORD")
+		fmt.Println("==========================")
 	}
+
+	// book.Title = "Man Tiger"
 
 	router := gin.Default()
 	v1 := router.Group("/v1")
