@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"pustaka-api/book"
 	"pustaka-api/handler"
@@ -20,6 +21,21 @@ func main() {
 	}
 
 	db.AutoMigrate(&book.Book{})
+
+	// CRUD
+	book := book.Book{}
+	book.Title = "Atomic Habits"
+	book.Price = 120000
+	book.Discount = 15
+	book.Rating = 4
+	book.Description = "Buku self development tentang membangun kebiasaan baik dan menghilangkan kebiasaan buruk"
+
+	err = db.Create(&book).Error
+	if err != nil {
+		fmt.Println("==========================")
+		fmt.Println("ERROR CREATING BOOK RECORD")
+		fmt.Println("==========================")
+	}
 
 	router := gin.Default()
 	v1 := router.Group("/v1")
