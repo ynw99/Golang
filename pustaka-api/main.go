@@ -85,7 +85,28 @@ func main() {
 	// 	fmt.Println("Objek:", b)
 	// }
 
-	// Update
+	// // Update
+	// var book book.Book
+
+	// err = db.Debug().Where("id = ?", 1).First(&book).Error
+
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("ERROR FINDING BOOK RECORD")
+	// 	fmt.Println("==========================")
+	// }
+
+	// book.Title = "Man Tiger (Revised Edition)"
+
+	// err = db.Save(&book).Error
+
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("ERROR UPDATING BOOK RECORD")
+	// 	fmt.Println("==========================")
+	// }
+
+	// Delete
 	var book book.Book
 
 	err = db.Debug().Where("id = ?", 1).First(&book).Error
@@ -96,17 +117,13 @@ func main() {
 		fmt.Println("==========================")
 	}
 
-	book.Title = "Man Tiger (Revised Edition)"
-
-	err = db.Save(&book).Error
+	err = db.Delete(&book).Error
 
 	if err != nil {
 		fmt.Println("==========================")
-		fmt.Println("ERROR UPDATING BOOK RECORD")
+		fmt.Println("ERROR DELETING BOOK RECORD")
 		fmt.Println("==========================")
 	}
-
-	// book.Title = "Man Tiger"
 
 	router := gin.Default()
 	v1 := router.Group("/v1")
