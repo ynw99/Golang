@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"pustaka-api/book"
 	"pustaka-api/handler"
@@ -20,7 +19,33 @@ func main() {
 		log.Fatal("DB Connection Error")
 	}
 
-	// db.AutoMigrate(&book.Book{})
+	db.AutoMigrate(&book.Book{})
+
+	// Repository Layer
+	bookRepository := book.NewRepository(db)
+
+	// FindAll
+	// books, err := bookRepository.FindAll()
+
+	// for _, book := range books {
+	// 	fmt.Println("Title:", book.Title)
+	// }
+
+	// FindByID
+	// book, err := bookRepository.FindByID(2)
+
+	// fmt.Println(book.Title)
+
+	// Struct method create
+	book := book.Book{
+		Title:       "$100 Startup",
+		Description: "Good Book",
+		Price:       95000,
+		Rating:      4,
+		Discount:    0,
+	}
+
+	bookRepository.Create(book)
 
 	// CRUD
 
@@ -106,24 +131,24 @@ func main() {
 	// 	fmt.Println("==========================")
 	// }
 
-	// Delete
-	var book book.Book
+	// // Delete
+	// var book book.Book
 
-	err = db.Debug().Where("id = ?", 1).First(&book).Error
+	// err = db.Debug().Where("id = ?", 1).First(&book).Error
 
-	if err != nil {
-		fmt.Println("==========================")
-		fmt.Println("ERROR FINDING BOOK RECORD")
-		fmt.Println("==========================")
-	}
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("ERROR FINDING BOOK RECORD")
+	// 	fmt.Println("==========================")
+	// }
 
-	err = db.Delete(&book).Error
+	// err = db.Delete(&book).Error
 
-	if err != nil {
-		fmt.Println("==========================")
-		fmt.Println("ERROR DELETING BOOK RECORD")
-		fmt.Println("==========================")
-	}
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("ERROR DELETING BOOK RECORD")
+	// 	fmt.Println("==========================")
+	// }
 
 	router := gin.Default()
 	v1 := router.Group("/v1")
