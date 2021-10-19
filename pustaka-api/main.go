@@ -24,6 +24,16 @@ func main() {
 	// Repository Layer
 	bookRepository := book.NewRepository(db)
 
+	// Service Layer
+	bookService := book.NewService(bookRepository)
+
+	bookRequest := book.BookRequest{
+		Title: "Komik Gundam",
+		Price: "200000",
+	}
+
+	bookService.Create(bookRequest)
+
 	// FindAll
 	// books, err := bookRepository.FindAll()
 
@@ -37,15 +47,15 @@ func main() {
 	// fmt.Println(book.Title)
 
 	// Struct method create
-	book := book.Book{
-		Title:       "$100 Startup",
-		Description: "Good Book",
-		Price:       95000,
-		Rating:      4,
-		Discount:    0,
-	}
+	// book := book.Book{
+	// 	Title:       "$100 Startup",
+	// 	Description: "Good Book",
+	// 	Price:       95000,
+	// 	Rating:      4,
+	// 	Discount:    0,
+	// }
 
-	bookRepository.Create(book)
+	// bookRepository.Create(book)
 
 	// CRUD
 
