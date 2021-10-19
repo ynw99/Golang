@@ -22,10 +22,13 @@ func main() {
 	db.AutoMigrate(&book.Book{})
 
 	// Repository Layer
-	bookRepository := book.NewRepository(db)
+	// bookRepository := book.NewRepository(db)
+
+	// File Repository
+	bookFileRepository := book.NewFileRepository()
 
 	// Service Layer
-	bookService := book.NewService(bookRepository)
+	bookService := book.NewService(bookFileRepository)
 
 	// bookRequest := book.BookRequest{
 	// 	Title: "Komik Gundam",
