@@ -22,6 +22,22 @@ func BenchmarkHelloWorldNurWahid(b *testing.B) {
 	}
 }
 
+// Sub benchmark
+func BenchmarkSub(b *testing.B) {
+	b.Run("Yusuf", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			HelloWorld("Yusuf")
+		}
+	})
+
+	b.Run("Nur", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			HelloWorld("Nur")
+		}
+	})
+
+}
+
 // Table test
 func TestTableHelloWorld(t *testing.T) {
 	type testStruct struct {
