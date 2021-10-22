@@ -38,6 +38,35 @@ func BenchmarkSub(b *testing.B) {
 
 }
 
+// Table benchmark
+func BenchmarkHelloWorldTable(b *testing.B) {
+	benchmarks := []struct {
+		name    string
+		request string
+	}{
+		{
+			name:    "Yusuf",
+			request: "Yusuf",
+		},
+		{
+			name:    "Nur",
+			request: "Nur",
+		},
+		{
+			name:    "Yusuf Nur Wahid",
+			request: "Yusuf Nur Wahid",
+		},
+	}
+
+	for _, benchmark := range benchmarks {
+		b.Run(benchmark.name, func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				HelloWorld(benchmark.request)
+			}
+		})
+	}
+}
+
 // Table test
 func TestTableHelloWorld(t *testing.T) {
 	type testStruct struct {
